@@ -1,0 +1,11 @@
+{
+    "name": "thelia/authorize-net-module",
+    "license": "LGPL-3.0+",
+    "type": "thelia-module",
+    "extra": {
+      "installer-name": "AuthorizeNet"
+    },
+    "require": {
+        "thelia/installer": "~1.0"
+    }
+}
