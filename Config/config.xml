@@ -3,4 +3,15 @@
 <config xmlns="http://thelia.net/schema/dic/config"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://thelia.net/schema/dic/config http://thelia.net/schema/dic/config/thelia-1.0.xsd">
+
+    <forms>
+        <form name="authorize_net.form.config" class="AuthorizeNet\Form\ConfigForm"/>
+    </forms>
+
+    <hooks>
+        <hook id="authorize_net.hook.back.config" class="AuthorizeNet\Hook\Back\ConfigHook" scope="request">
+            <tag name="hook.event_listener" type="backoffice" event="module.configuration"/>
+        </hook>
+    </hooks>
+
 </config>

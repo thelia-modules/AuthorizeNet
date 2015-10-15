@@ -1,0 +1,24 @@
+{* AuthorizeNet module configuration *}
+
+{set_previous_url path='/admin/modules'}
+{$page_url = {navigate to='current'}}
+{$back_url = {navigate to='previous'}}
+{$save_url = {url path='/admin/module/AuthorizeNet'}}
+
+{form name='authorize_net.form.config'}
+    <div class="general-block-decorator form-container">
+        <form method="post" action="{$save_url}">
+            {include
+            file = 'includes/inner-form-toolbar.html'
+            page_url = $page_url
+            close_url = $back_url
+            hide_flags = true
+            }
+
+            {form_hidden_fields form=$form}
+
+            {render_form_field form=$form field='api_login_id'}
+            {render_form_field form=$form field='transaction_key'}
+        </form>
+    </div>
+{/form}
