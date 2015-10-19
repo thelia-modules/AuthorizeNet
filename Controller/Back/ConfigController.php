@@ -21,6 +21,7 @@ class ConfigController extends BaseAdminController
     protected $fieldsToSave = [
         ConfigKeys::API_LOGIN_ID,
         ConfigKeys::TRANSACTION_KEY,
+        ConfigKeys::HASH_VALUE,
         ConfigKeys::CALLBACK_URL,
         ConfigKeys::RECEIPT_LINK_TEXT,
     ];

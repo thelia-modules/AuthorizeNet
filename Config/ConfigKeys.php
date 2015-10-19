@@ -20,6 +20,11 @@ class ConfigKeys
     const TRANSACTION_KEY = 'transaction_key';
 
     /**
+     * Hash value/salt for gateway response authentication.
+     */
+    const HASH_VALUE = 'hash_value';
+
+    /**
      * The URL to use as the gateway callback.
      * @var string
      */

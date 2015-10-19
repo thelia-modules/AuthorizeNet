@@ -3,7 +3,9 @@
 namespace AuthorizeNet\Controller\Front;
 
 use AuthorizeNet\AuthorizeNet;
+use AuthorizeNet\Config\ConfigKeys;
 use AuthorizeNet\ResponseCode;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Thelia\Core\Event\Order\OrderEvent;
 use Thelia\Core\Event\TheliaEvents;
@@ -28,6 +30,20 @@ class GatewayController extends BasePaymentModuleController
     public function callbackAction()
     {
         $request = $this->getRequest()->request;
+
+        // challenge the gateway authentication hash with our local hash
+        $gatewayHash = $request->get('x_MD5_Hash');
+
+        $hashValue = AuthorizeNet::getConfigValue(ConfigKeys::HASH_VALUE, '');
+        $APILoginID = AuthorizeNet::getConfigValue(ConfigKeys::API_LOGIN_ID);
+        $transactionID = $request->get('x_trans_id');
+        $amount = $request->get('x_amount');
+
+        $localHash = md5($hashValue . $APILoginID . $transactionID . $amount);
+
+        if (strtolower($gatewayHash) !== strtolower($localHash)) {
+            throw new AccessDeniedHttpException();
+        }
 
         $orderRef = $request->get('x_invoice_num');
         $order = OrderQuery::create()->findOneByRef($orderRef);

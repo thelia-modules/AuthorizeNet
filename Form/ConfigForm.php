@@ -36,6 +36,14 @@ class ConfigForm extends BaseForm
                 ]
             )
             ->add(
+                ConfigKeys::HASH_VALUE,
+                'text',
+                [
+                    'label' => $this->translator->trans('MD5 hash value'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HASH_VALUE),
+                ]
+            )
+            ->add(
                 ConfigKeys::CALLBACK_URL,
                 'text',
                 [
