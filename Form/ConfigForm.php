@@ -34,6 +34,22 @@ class ConfigForm extends BaseForm
                     'label' => $this->translator->trans('Transaction key'),
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::TRANSACTION_KEY),
                 ]
+            )
+            ->add(
+                ConfigKeys::CALLBACK_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Gateway callback URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::CALLBACK_URL),
+                ]
+            )
+            ->add(
+                ConfigKeys::RECEIPT_LINK_TEXT,
+                'text',
+                [
+                    'label' => $this->translator->trans('Receipt link text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::RECEIPT_LINK_TEXT),
+                ]
             );
     }
 }

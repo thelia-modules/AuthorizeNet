@@ -8,4 +8,8 @@
         <default key="_controller">AuthorizeNet:Back\Config:save</default>
     </route>
 
+    <route id="authorize_net.front.gateway.callback" path="/AuthorizeNet/gateway/callback" methods="post">
+        <default key="_controller">AuthorizeNet:Front\Gateway:callback</default>
+    </route>
+
 </routes>

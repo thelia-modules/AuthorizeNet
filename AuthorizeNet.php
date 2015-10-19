@@ -3,8 +3,10 @@
 namespace AuthorizeNet;
 
 use AuthorizeNet\Config\ConfigKeys;
+use Symfony\Component\Routing\RouterInterface;
 use Thelia\Model\Order;
 use Thelia\Module\AbstractPaymentModule;
+use Thelia\Tools\URL;
 
 class AuthorizeNet extends AbstractPaymentModule
 {
@@ -13,6 +15,9 @@ class AuthorizeNet extends AbstractPaymentModule
 
     public function pay(Order $order)
     {
+        /** @var RouterInterface $router */
+        $router = $this->getContainer()->get('router.' . static::getModuleCode());
+
         $fields = [];
 
         // base fields
@@ -78,6 +83,16 @@ class AuthorizeNet extends AbstractPaymentModule
         $fields['x_ship_to_city'] = $shippingAddress->getCity();
         $fields['x_ship_to_zip'] = $shippingAddress->getZipcode();
         $fields['x_ship_to_country'] = $shippingAddress->getCountry()->getTitle();
+
+        // receipt link
+        $fields['x_receipt_link_method'] = 'POST';
+
+        $callbackURL = AuthorizeNet::getConfigValue(ConfigKeys::CALLBACK_URL);
+        if (empty($callbackURL)) {
+            $callbackURL = URL::getInstance()->absoluteUrl($router->generate('authorize_net.front.gateway.callback'));
+        }
+        $fields['x_receipt_link_url'] = $callbackURL;
+        $fields['x_receipt_link_text'] = static::getConfigValue(ConfigKeys::RECEIPT_LINK_TEXT);
 
         return $this->generateGatewayFormResponse($order, static::GATEWAY_URL, $fields);
     }
