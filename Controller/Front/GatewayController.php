@@ -3,15 +3,9 @@
 namespace AuthorizeNet\Controller\Front;
 
 use AuthorizeNet\AuthorizeNet;
-use AuthorizeNet\Config\ConfigKeys;
-use AuthorizeNet\ResponseCode;
+use AuthorizeNet\Service\SIM\SIMServiceInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Thelia\Core\Event\Order\OrderEvent;
-use Thelia\Core\Event\TheliaEvents;
-use Thelia\Model\OrderQuery;
-use Thelia\Model\OrderStatus;
-use Thelia\Model\OrderStatusQuery;
 use Thelia\Module\BasePaymentModuleController;
 
 /**
@@ -29,42 +23,24 @@ class GatewayController extends BasePaymentModuleController
      */
     public function callbackAction()
     {
-        $request = $this->getRequest()->request;
+        $response = $this->getRequest()->request->all();
 
-        // challenge the gateway authentication hash with our local hash
-        $gatewayHash = $request->get('x_MD5_Hash');
+        /** @var SIMServiceInterface $SIMService */
+        $SIMService = $this->getContainer()->get('authorize_net.service.sim');
 
-        $hashValue = AuthorizeNet::getConfigValue(ConfigKeys::HASH_VALUE, '');
-        $APILoginID = AuthorizeNet::getConfigValue(ConfigKeys::API_LOGIN_ID);
-        $transactionID = $request->get('x_trans_id');
-        $amount = $request->get('x_amount');
-
-        $localHash = md5($hashValue . $APILoginID . $transactionID . $amount);
-
-        if (strtolower($gatewayHash) !== strtolower($localHash)) {
-            throw new AccessDeniedHttpException();
+        if (!$SIMService->isResponseHashValid($response)) {
+            throw new AccessDeniedHttpException('Invalid response hash.');
         }
 
-        $orderRef = $request->get('x_invoice_num');
-        $order = OrderQuery::create()->findOneByRef($orderRef);
+        $order = $SIMService->getOrderFromResponse($response);
         if ($order === null) {
             throw new NotFoundHttpException('Order not found.');
         }
 
-        $orderEvent = new OrderEvent($order);
-
-        $responseCode = $this->getRequest()->get('x_response_code');
-        switch ($responseCode) {
-            case ResponseCode::APPROVED:
-                $orderStatusPaid = OrderStatusQuery::create()->findOneByCode(OrderStatus::CODE_PAID);
-                $orderEvent->setStatus($orderStatusPaid->getId());
-                $this->getDispatcher()->dispatch(TheliaEvents::ORDER_UPDATE_STATUS, $orderEvent);
-                $this->redirectToSuccessPage($order->getId());
-                break;
-            case ResponseCode::DECLINED:
-            default:
-                $this->redirectToFailurePage($order->getId(), $this->getTranslator()->trans('Payment error.'));
-                break;
+        if ($SIMService->payOrderFromResponse($response, $order)) {
+            $this->redirectToSuccessPage($order->getId());
+        } else {
+            $this->redirectToFailurePage($order->getId(), $this->getTranslator()->trans('Payment error.'));
         }
     }
 }

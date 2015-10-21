@@ -14,4 +14,12 @@
         </hook>
     </hooks>
 
+    <services>
+        <service id="authorize_net.service.sim" class="AuthorizeNet\Service\SIM\SIMService">
+            <argument type="service" id="router.authorizenet"/>
+            <argument type="service" id="thelia.url.manager"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+    </services>
+
 </config>
