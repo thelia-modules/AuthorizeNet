@@ -4,6 +4,7 @@ namespace AuthorizeNet\Form;
 
 use AuthorizeNet\AuthorizeNet;
 use AuthorizeNet\Config\ConfigKeys;
+use AuthorizeNet\Config\GatewayResponseType;
 use Thelia\Form\BaseForm;
 
 /**
@@ -68,11 +69,39 @@ class ConfigForm extends BaseForm
                 ]
             )
             ->add(
+                ConfigKeys::GATEWAY_RESPONSE_TYPE,
+                'choice',
+                [
+                    'label' => $this->translator->trans('Gateway response type'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_RESPONSE_TYPE),
+                    'choices' => [
+                        GatewayResponseType::NONE => $this->translator->trans(
+                            'No response'
+                        ),
+                        GatewayResponseType::RECEIPT_LINK => $this->translator->trans(
+                            'Link back to the store on the receipt page'
+                        ),
+                        GatewayResponseType::RELAY_RESPONSE => $this->translator->trans(
+                            'Redirection to the store'
+                        ),
+                    ]
+                ]
+            )
+            ->add(
                 ConfigKeys::RECEIPT_LINK_TEXT,
                 'text',
                 [
                     'label' => $this->translator->trans('Receipt link text'),
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::RECEIPT_LINK_TEXT),
+                ]
+            )
+            ->add(
+                ConfigKeys::RELAY_RESPONSE_ALWAYS,
+                'checkbox',
+                [
+                    'label' => $this->translator->trans('Redirect in all cases'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::RELAY_RESPONSE_ALWAYS) == 1,
+                    'required' => false,
                 ]
             );
     }

@@ -25,7 +25,9 @@ class ConfigController extends BaseAdminController
         ConfigKeys::TRANSACTION_VERSION,
         ConfigKeys::GATEWAY_URL,
         ConfigKeys::CALLBACK_URL,
+        ConfigKeys::GATEWAY_RESPONSE_TYPE,
         ConfigKeys::RECEIPT_LINK_TEXT,
+        ConfigKeys::RELAY_RESPONSE_ALWAYS,
     ];
 
     /**

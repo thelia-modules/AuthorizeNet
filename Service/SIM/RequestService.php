@@ -4,6 +4,7 @@ namespace AuthorizeNet\Service\SIM;
 
 use AuthorizeNet\AuthorizeNet;
 use AuthorizeNet\Config\ConfigKeys;
+use AuthorizeNet\Config\GatewayResponseType;
 use Symfony\Component\Routing\RouterInterface;
 use Thelia\Core\HttpFoundation\Request;
 use Thelia\Model\Customer;
@@ -76,7 +77,16 @@ class RequestService implements RequestServiceInterface
 
         $this->addItemizedOrderFields($request, $order);
 
-        $this->addReceiptLinkFields($request);
+        switch (AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_RESPONSE_TYPE)) {
+            case GatewayResponseType::NONE:
+                break;
+            case GatewayResponseType::RECEIPT_LINK:
+                $this->addReceiptLinkFields($request);
+                break;
+            case GatewayResponseType::RELAY_RESPONSE:
+                $this->addRelayResponseFields($request);
+                break;
+        }
 
         $this->addFingerprintFields($request);
 
@@ -161,6 +171,14 @@ class RequestService implements RequestServiceInterface
         $request['x_receipt_link_method'] = 'POST';
         $request['x_receipt_link_url'] = $this->getCallbackURL();
         $request['x_receipt_link_text'] = AuthorizeNet::getConfigValue(ConfigKeys::RECEIPT_LINK_TEXT);
+    }
+
+    protected function addRelayResponseFields(array &$request)
+    {
+        $request['x_relay_response'] = 'TRUE';
+        $request['x_relay_url'] = $this->getCallbackURL();
+        $request['x_relay_always']
+            = (AuthorizeNet::getConfigValue(ConfigKeys::RELAY_RESPONSE_ALWAYS) ? 'TRUE' : 'FALSE');
     }
 
     protected function addFingerprintFields(array &$request)
