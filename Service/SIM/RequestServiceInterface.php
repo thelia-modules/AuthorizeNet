@@ -2,6 +2,7 @@
 
 namespace AuthorizeNet\Service\SIM;
 
+use Thelia\Core\HttpFoundation\Request;
 use Thelia\Model\Order;
 
 /**
@@ -22,7 +23,8 @@ interface RequestServiceInterface
     /**
      * Build the payment form request fields.
      * @param Order $order Order to send for payment.
+     * @param Request $httpRequest HTTP request.
      * @return array Request fields.
      */
-    public function getRequestFields(Order $order);
+    public function getRequestFields(Order $order, Request $httpRequest);
 }

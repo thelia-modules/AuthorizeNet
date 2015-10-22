@@ -16,7 +16,7 @@ class AuthorizeNet extends AbstractPaymentModule
         return $this->generateGatewayFormResponse(
             $order,
             $SIMRequestService->getGatewayURL(),
-            $SIMRequestService->getRequestFields($order)
+            $SIMRequestService->getRequestFields($order, $this->getRequest())
         );
     }
 

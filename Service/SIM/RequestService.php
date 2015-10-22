@@ -5,6 +5,7 @@ namespace AuthorizeNet\Service\SIM;
 use AuthorizeNet\AuthorizeNet;
 use AuthorizeNet\Config\ConfigKeys;
 use Symfony\Component\Routing\RouterInterface;
+use Thelia\Core\HttpFoundation\Request;
 use Thelia\Model\Customer;
 use Thelia\Model\Order;
 use Thelia\Model\OrderAddress;
@@ -56,7 +57,7 @@ class RequestService implements RequestServiceInterface
         return $callbackURL;
     }
 
-    public function getRequestFields(Order $order)
+    public function getRequestFields(Order $order, Request $httpRequest)
     {
         $request = [];
 
@@ -64,6 +65,8 @@ class RequestService implements RequestServiceInterface
 
         $customer = $order->getCustomer();
         $this->addCustomerFields($request, $customer);
+
+        $this->addCustomerIPFields($request, $httpRequest);
 
         $billingAddress = $order->getOrderAddressRelatedByInvoiceOrderAddressId();
         $this->addBillingAddressFields($request, $billingAddress);
@@ -96,6 +99,11 @@ class RequestService implements RequestServiceInterface
     {
         $request['x_email'] = $customer->getEmail();
         $request['x_cust_id'] = $customer->getRef();
+    }
+
+    protected function addCustomerIPFields(array &$request, Request $httpRequest)
+    {
+        $request['x_customer_ip'] = $httpRequest->getClientIp();
     }
 
     protected function addBillingAddressFields(array &$request, OrderAddress $address)
