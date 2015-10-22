@@ -71,6 +71,8 @@ class RequestService implements RequestServiceInterface
         $shippingAddress = $order->getOrderAddressRelatedByDeliveryOrderAddressId();
         $this->addShippingAddressFields($request, $shippingAddress);
 
+        $this->addItemizedOrderFields($request, $order);
+
         $this->addReceiptLinkFields($request);
 
         $this->addFingerprintFields($request);
@@ -123,6 +125,27 @@ class RequestService implements RequestServiceInterface
         $request['x_ship_to_city'] = $address->getCity();
         $request['x_ship_to_zip'] = $address->getZipcode();
         $request['x_ship_to_country'] = $address->getCountry()->getTitle();
+    }
+
+    protected function addItemizedOrderFields(array &$request, Order $order)
+    {
+        $items = [];
+
+        foreach ($order->getOrderProducts() as $orderProduct) {
+            $items[]
+                = $orderProduct->getProductRef()
+                . '<|>'
+                . $orderProduct->getTitle()
+                . '<|>'
+                . $orderProduct->getDescription()
+                . '<|>'
+                . $orderProduct->getQuantity()
+                . '<|>'
+                . ($orderProduct->getWasInPromo() ? $orderProduct->getPromoPrice() : $orderProduct->getPrice())
+                . '<|>';
+        }
+
+        $request['x_line_item'] = $items;
     }
 
     protected function addReceiptLinkFields(array &$request)
