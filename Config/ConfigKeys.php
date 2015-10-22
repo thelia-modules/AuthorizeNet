@@ -33,6 +33,7 @@ class ConfigKeys
 
     /**
      * Payment gateway URL.
+     * @var string
      */
     const GATEWAY_URL = 'gateway_url';
 
