@@ -3,7 +3,7 @@
 namespace AuthorizeNet\Controller\Front;
 
 use AuthorizeNet\AuthorizeNet;
-use AuthorizeNet\Service\SIM\SIMServiceInterface;
+use AuthorizeNet\Service\SIM\ResponseServiceInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Thelia\Module\BasePaymentModuleController;
@@ -25,19 +25,19 @@ class GatewayController extends BasePaymentModuleController
     {
         $response = $this->getRequest()->request->all();
 
-        /** @var SIMServiceInterface $SIMService */
-        $SIMService = $this->getContainer()->get('authorize_net.service.sim');
+        /** @var ResponseServiceInterface $SIMResponseService */
+        $SIMResponseService = $this->getContainer()->get('authorize_net.service.sim.response');
 
-        if (!$SIMService->isResponseHashValid($response)) {
+        if (!$SIMResponseService->isResponseHashValid($response)) {
             throw new AccessDeniedHttpException('Invalid response hash.');
         }
 
-        $order = $SIMService->getOrderFromResponse($response);
+        $order = $SIMResponseService->getOrderFromResponse($response);
         if ($order === null) {
             throw new NotFoundHttpException('Order not found.');
         }
 
-        if ($SIMService->payOrderFromResponse($response, $order)) {
+        if ($SIMResponseService->payOrderFromResponse($response, $order)) {
             $this->redirectToSuccessPage($order->getId());
         } else {
             $this->redirectToFailurePage($order->getId(), $this->getTranslator()->trans('Payment error.'));

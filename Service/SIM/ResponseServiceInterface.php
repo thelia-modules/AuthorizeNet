@@ -5,35 +5,10 @@ namespace AuthorizeNet\Service\SIM;
 use Thelia\Model\Order;
 
 /**
- * Methods for Authorize.Net SIM (Server Integration Method, i.e. the hosted payment form) integration.
+ * Service to process SIM (Server Integration Method) gateway responses.
  */
-interface SIMServiceInterface
+interface ResponseServiceInterface
 {
-    /**
-     * @return string Payment gateway URL.
-     */
-    public function getGatewayURL();
-
-    /**
-     * @return string Callback URL to be called by the payment gateway.
-     */
-    public function getCallbackURL();
-
-    /**
-     * Build the payment form request fields.
-     * @param Order $order Order to send for payment.
-     * @return array Request fields.
-     */
-    public function getRequestFields(Order $order);
-
-    /**
-     * Add the timestamp and fingerprint to a request.
-     * Replaces any previous timestamp and fingerprint.
-     * @param array $request Request fields.
-     * @return array Request fields with the added fingerprint.
-     */
-    public function setRequestFingerprint(array $request);
-
     /**
      * Authenticate a gateway response from the hash value.
      * @param array $response Response fields.
