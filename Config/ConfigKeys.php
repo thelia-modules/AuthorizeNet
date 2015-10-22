@@ -21,8 +21,20 @@ class ConfigKeys
 
     /**
      * Hash value/salt for gateway response authentication.
+     * @var string
      */
     const HASH_VALUE = 'hash_value';
+
+    /**
+     * Transaction version.
+     * @var string
+     */
+    const TRANSACTION_VERSION = 'transaction_version';
+
+    /**
+     * Payment gateway URL.
+     */
+    const GATEWAY_URL = 'gateway_url';
 
     /**
      * The URL to use as the gateway callback.

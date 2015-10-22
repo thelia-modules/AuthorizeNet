@@ -44,6 +44,22 @@ class ConfigForm extends BaseForm
                 ]
             )
             ->add(
+                ConfigKeys::TRANSACTION_VERSION,
+                'text',
+                [
+                    'label' => $this->translator->trans('Transaction version'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::TRANSACTION_VERSION),
+                ]
+            )
+            ->add(
+                ConfigKeys::GATEWAY_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payement gateway URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_URL),
+                ]
+            )
+            ->add(
                 ConfigKeys::CALLBACK_URL,
                 'text',
                 [

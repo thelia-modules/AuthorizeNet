@@ -22,6 +22,8 @@ class ConfigController extends BaseAdminController
         ConfigKeys::API_LOGIN_ID,
         ConfigKeys::TRANSACTION_KEY,
         ConfigKeys::HASH_VALUE,
+        ConfigKeys::TRANSACTION_VERSION,
+        ConfigKeys::GATEWAY_URL,
         ConfigKeys::CALLBACK_URL,
         ConfigKeys::RECEIPT_LINK_TEXT,
     ];

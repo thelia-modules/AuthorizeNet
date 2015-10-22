@@ -20,9 +20,6 @@ use Thelia\Tools\URL;
  */
 class SIMService implements SIMServiceInterface
 {
-    const GATEWAY_URL = 'https://test.authorize.net/gateway/transact.dll';
-    const TRANSACTION_VERSION = '3.1';
-
     /**
      * Router for this module.
      * @var RouterInterface
@@ -58,7 +55,7 @@ class SIMService implements SIMServiceInterface
 
     public function getGatewayURL()
     {
-        return static::GATEWAY_URL;
+        return AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_URL);
     }
 
     public function getCallbackURL()
@@ -81,7 +78,7 @@ class SIMService implements SIMServiceInterface
         $request['x_login'] = AuthorizeNet::getConfigValue(ConfigKeys::API_LOGIN_ID);
         $request['x_show_form'] = 'PAYMENT_FORM';
         $request['x_relay_response'] = 'FALSE';
-        $request['x_version'] = static::TRANSACTION_VERSION;
+        $request['x_version'] = AuthorizeNet::getConfigValue(ConfigKeys::TRANSACTION_VERSION);
         $request['x_amount'] = $order->getTotalAmount();
         $request['x_currency_code'] = $order->getCurrency()->getCode();
 
