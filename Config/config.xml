@@ -12,6 +12,10 @@
         <hook id="authorize_net.hook.back.config" class="AuthorizeNet\Hook\Back\ConfigHook" scope="request">
             <tag name="hook.event_listener" type="backoffice" event="module.configuration"/>
         </hook>
+
+        <hook id="authorize_net.hook.front.order" class="AuthorizeNet\Hook\Front\OrderHook" scope="request">
+            <tag name="hook.event_listener" type="frontoffice" event="order-payment-gateway.body"/>
+        </hook>
     </hooks>
 
     <services>
