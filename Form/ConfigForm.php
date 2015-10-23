@@ -50,6 +50,7 @@ class ConfigForm extends BaseForm
                 [
                     'label' => $this->translator->trans('Transaction version'),
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::TRANSACTION_VERSION),
+                    'required' => false,
                 ]
             )
             ->add(
@@ -58,6 +59,7 @@ class ConfigForm extends BaseForm
                 [
                     'label' => $this->translator->trans('Payement gateway URL'),
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_URL),
+                    'required' => false,
                 ]
             )
             ->add(
