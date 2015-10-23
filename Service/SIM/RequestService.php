@@ -77,6 +77,8 @@ class RequestService implements RequestServiceInterface
 
         $this->addItemizedOrderFields($request, $order);
 
+        $this->addHostedFormsCustomizationFields($request);
+
         switch (AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_RESPONSE_TYPE)) {
             case GatewayResponseType::NONE:
                 break;
@@ -164,6 +166,48 @@ class RequestService implements RequestServiceInterface
         }
 
         $request['x_line_item'] = $items;
+    }
+
+    protected function addHostedFormsCustomizationFields(array &$request)
+    {
+        $request['x_return_policy_url']
+            = AuthorizeNet::getConfigValue(ConfigKeys::RETURN_POLICY_URL);
+        $request['x_header_html_payment_form']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_HTML);
+        $request['x_footer_html_payment_form']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER_HTML);
+        $request['x_header2_html_payment_form']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER2_HTML);
+        $request['x_footer2_html_payment_form']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER2_HTML);
+        $request['x_color_background']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_BACKGROUND);
+        $request['x_color_link']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_LINK);
+        $request['x_color_text']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_TEXT);
+        $request['x_logo_url']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_LOGO_URL);
+        $request['x_background_url']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_BACKGROUND_URL);
+        $request['x_cancel_url']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_CANCEL_URL);
+        $request['x_cancel_url_text']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_CANCEL_URL_TEXT);
+        $request['x_font_family']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FONT_FAMILY);
+        $request['x_font_size']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FONT_SIZE);
+        $request['x_sectionhead1_color_text']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_COLOR_TEXT);
+        $request['x_sectionhead1_font_family']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_FAMILY);
+        $request['x_sectionhead1_font_size']
+            = AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_SIZE);
+        $request['x_sectionhead1_font_bold']
+            = (AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_BOLD) ? 'TRUE' : 'FALSE');
+        $request['x_sectionhead1_font_italic']
+            = (AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC) ? 'TRUE' : 'FALSE');
     }
 
     protected function addReceiptLinkFields(array &$request)

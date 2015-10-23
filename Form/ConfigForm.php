@@ -103,6 +103,177 @@ class ConfigForm extends BaseForm
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::RELAY_RESPONSE_ALWAYS) == 1,
                     'required' => false,
                 ]
+            )
+            ->add(
+                ConfigKeys::RETURN_POLICY_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Return policy URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::RETURN_POLICY_URL),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_HTML,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form header text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_HTML),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER2_HTML,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form top of header text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER2_HTML),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER_HTML,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form footer text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER_HTML),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER2_HTML,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form top of footer text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FOOTER2_HTML),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_COLOR_BACKGROUND,
+                'text',
+                [
+                    'label' => $this->translator->trans('Hosted forms background color'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_BACKGROUND),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_COLOR_LINK,
+                'text',
+                [
+                    'label' => $this->translator->trans('Hosted forms hyperlinks color'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_LINK),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_COLOR_TEXT,
+                'text',
+                [
+                    'label' => $this->translator->trans('Hosted forms text color'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_COLOR_TEXT),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_LOGO_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Hosted forms logo URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_LOGO_URL),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_BACKGROUND_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Hosted forms background image URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_BACKGROUND_URL),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_CANCEL_URL,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form cancel link target URL'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_CANCEL_URL),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_CANCEL_URL_TEXT,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form cancel link text'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_CANCEL_URL_TEXT),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_FONT_FAMILY,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form font family'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FONT_FAMILY),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_FONT_SIZE,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form font size'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_FONT_SIZE),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_COLOR_TEXT,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form header text color'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_COLOR_TEXT),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_FAMILY,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form header font family'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_FAMILY),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_SIZE,
+                'text',
+                [
+                    'label' => $this->translator->trans('Payment form header font size'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_SIZE),
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_BOLD,
+                'checkbox',
+                [
+                    'label' => $this->translator->trans('Payment form header bold font'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_BOLD) == 1,
+                    'required' => false,
+                ]
+            )
+            ->add(
+                ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC,
+                'checkbox',
+                [
+                    'label' => $this->translator->trans('Payment form header italic font'),
+                    'data' => AuthorizeNet::getConfigValue(ConfigKeys::HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC) == 1,
+                    'required' => false,
+                ]
             );
     }
 }

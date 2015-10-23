@@ -60,4 +60,118 @@ class ConfigKeys
      * @var string
      */
     const RELAY_RESPONSE_ALWAYS = 'relay_response_always';
+
+    /**
+     * Merchant's return policy URL.
+     * @var string
+     */
+    const RETURN_POLICY_URL = 'return_policy_url';
+
+    /**
+     * Payment form header text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_HTML = 'hosted_payment_form_header_html';
+
+    /**
+     * Payment form top of header text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER2_HTML = 'hosted_payment_form_header2_html';
+
+    /**
+     * Payment form footer text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_FOOTER_HTML = 'hosted_payment_form_footer_html';
+
+    /**
+     * Payment form top of footer text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_FOOTER2_HTML = 'hosted_payment_form_footer2_html';
+
+    /**
+     * Payment form/receipt page background color.
+     * @var string
+     */
+    const HOSTED_COLOR_BACKGROUND = 'hosted_color_background';
+
+    /**
+     * Payment form/receipt page hyperlinks color.
+     * @var string
+     */
+    const HOSTED_COLOR_LINK = 'hosted_color_link';
+
+    /**
+     * Payment form/receipt page text color.
+     * @var string
+     */
+    const HOSTED_COLOR_TEXT = 'hosted_color_text';
+
+    /**
+     * Payment form/receipt page logo URL.
+     * @var string
+     */
+    const HOSTED_LOGO_URL = 'hosted_logo_url';
+
+    /**
+     * Payment form/receipt page background image URL.
+     * @var string
+     */
+    const HOSTED_BACKGROUND_URL = 'hosted_background_url';
+
+    /**
+     * Payment form cancel link target URL.
+     * @var string
+     */
+    const HOSTED_CANCEL_URL = 'hosted_cancel_url';
+
+    /**
+     * Payment form cancel link text.
+     * @var string
+     */
+    const HOSTED_CANCEL_URL_TEXT = 'hosted_cancel_url_text';
+
+    /**
+     * Payment form font family.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_FONT_FAMILY = 'hosted_payment_form_font_family';
+
+    /**
+     * Payment form font size.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_FONT_SIZE = 'hosted_payment_form_font_size';
+
+    /**
+     * Payment form header text color.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_COLOR_TEXT = 'hosted_payment_form_header_color_text';
+
+    /**
+     * Payment form header font family.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_FONT_FAMILY = 'hosted_payment_form_header_font_family';
+
+    /**
+     * Payment form header font size.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_FONT_SIZE = 'hosted_payment_form_header_font_size';
+
+    /**
+     * Whether the payment form header should be in bold text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_FONT_BOLD = 'hosted_payment_form_header_font_bold';
+
+    /**
+     * Whether the payment form header should be in italicized text.
+     * @var string
+     */
+    const HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC = 'hosted_payment_form_header_font_bold';
 }
