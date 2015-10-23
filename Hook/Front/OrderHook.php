@@ -19,7 +19,7 @@ class OrderHook extends BaseHook
     {
         $event->add(
             $this->render(
-                'authorize-net-order-payement-gateway-body.html',
+                'authorize-net-order-payment-gateway-body.html',
                 [
                     'PAYMENT_MODULE' => $event->getArgument('module'),
                 ]
