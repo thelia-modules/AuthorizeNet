@@ -17,34 +17,155 @@
 
             {form_hidden_fields form=$form}
 
-            {render_form_field form=$form field='api_login_id'}
-            {render_form_field form=$form field='transaction_key'}
-            {render_form_field form=$form field='hash_value'}
-            {render_form_field form=$form field='transaction_version'}
-            {render_form_field form=$form field='gateway_url'}
-            {render_form_field form=$form field='callback_url'}
-            {render_form_field form=$form field='gateway_response_type'}
-            {render_form_field form=$form field='receipt_link_text'}
-            {render_form_field form=$form field='relay_response_always'}
-            {render_form_field form=$form field='return_policy_url'}
-            {render_form_field form=$form field='hosted_payment_form_header_html'}
-            {render_form_field form=$form field='hosted_payment_form_header2_html'}
-            {render_form_field form=$form field='hosted_payment_form_footer_html'}
-            {render_form_field form=$form field='hosted_payment_form_footer2_html'}
-            {render_form_field form=$form field='hosted_color_background'}
-            {render_form_field form=$form field='hosted_color_link'}
-            {render_form_field form=$form field='hosted_color_text'}
-            {render_form_field form=$form field='hosted_logo_url'}
-            {render_form_field form=$form field='hosted_background_url'}
-            {render_form_field form=$form field='hosted_cancel_url'}
-            {render_form_field form=$form field='hosted_cancel_url_text'}
-            {render_form_field form=$form field='hosted_payment_form_font_family'}
-            {render_form_field form=$form field='hosted_payment_form_font_size'}
-            {render_form_field form=$form field='hosted_payment_form_header_color_text'}
-            {render_form_field form=$form field='hosted_payment_form_header_font_family'}
-            {render_form_field form=$form field='hosted_payment_form_header_font_size'}
-            {render_form_field form=$form field='hosted_payment_form_header_font_bold'}
-            {render_form_field form=$form field='hosted_payment_form_header_font_italic'}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='api_login_id'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='transaction_key'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hash_value'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        {render_form_field form=$form field='gateway_url'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='transaction_version'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {render_form_field form=$form field='callback_url'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {render_form_field form=$form field='gateway_response_type'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {render_form_field form=$form field='relay_response_always'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {render_form_field form=$form field='receipt_link_text'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title tile-without-tabs">
+                            {intl l='Hosted forms customization'}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_color_background'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_color_text'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_color_link'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_logo_url'}
+                    </div>
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_background_url'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        {render_form_field form=$form field='return_policy_url'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title tile-without-tabs">
+                            {intl l='Payment form customization'}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_payment_form_header_html'}
+                    </div>
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_payment_form_footer_html'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_payment_form_header2_html'}
+                    </div>
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_payment_form_footer2_html'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_cancel_url_text'}
+                    </div>
+                    <div class="col-md-6">
+                        {render_form_field form=$form field='hosted_cancel_url'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        {render_form_field form=$form field='hosted_payment_form_font_family'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_payment_form_font_size'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_payment_form_header_color_text'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8">
+                        {render_form_field form=$form field='hosted_payment_form_header_font_family'}
+                    </div>
+                    <div class="col-md-4">
+                        {render_form_field form=$form field='hosted_payment_form_header_font_size'}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        {render_form_field form=$form field='hosted_payment_form_header_font_bold'}
+                    </div>
+                    <div class="col-md-3">
+                        {render_form_field form=$form field='hosted_payment_form_header_font_italic'}
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 {/form}
