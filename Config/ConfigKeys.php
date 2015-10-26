@@ -173,5 +173,5 @@ class ConfigKeys
      * Whether the payment form header should be in italicized text.
      * @var string
      */
-    const HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC = 'hosted_payment_form_header_font_bold';
+    const HOSTED_PAYMENT_FORM_HEADER_FONT_ITALIC = 'hosted_payment_form_header_font_italic';
 }
