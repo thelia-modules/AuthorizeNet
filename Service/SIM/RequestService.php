@@ -75,7 +75,9 @@ class RequestService implements RequestServiceInterface
         $shippingAddress = $order->getOrderAddressRelatedByDeliveryOrderAddressId();
         $this->addShippingAddressFields($request, $shippingAddress);
 
-        $this->addItemizedOrderFields($request, $order);
+        // not active for now
+        // the itemized pricing is confusing without full support for taxes on the order
+        // $this->addItemizedOrderFields($request, $order);
 
         $this->addHostedFormsCustomizationFields($request);
 
