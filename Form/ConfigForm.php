@@ -57,7 +57,7 @@ class ConfigForm extends BaseForm
                 ConfigKeys::GATEWAY_URL,
                 'text',
                 [
-                    'label' => $this->translator->trans('Payement gateway URL'),
+                    'label' => $this->translator->trans('Payment gateway URL'),
                     'data' => AuthorizeNet::getConfigValue(ConfigKeys::GATEWAY_URL),
                     'required' => false,
                 ]
